@@ -6,7 +6,11 @@
   "scripts": {
     "mongodb": "cd scripts/ && start-mongodb.bat",
     "start": "node src/index.js",
-    "dev": "nodemon -r dotenv/config src/index.js"
+    "dev": "env-cmd -f config/dev.env nodemon src/index.js",
+    "test": "env-cmd -f config/test.env jest --detectOpenHandles --watch --runInBand"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +27,9 @@
     "validator": "^11.1.0"
   },
   "devDependencies": {
+    "env-cmd": "^9.0.3",
+    "jest": "^24.9.0",
     "nodemon": "^1.19.1",
-    "dotenv": "^8.1.0"
+    "supertest": "^4.0.2"
   }
 }
