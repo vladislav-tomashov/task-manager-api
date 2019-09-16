@@ -8,10 +8,24 @@ const schema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User"
-    }
+    },
+    images: [
+      {
+        image: {
+          type: Buffer
+        }
+      }
+    ]
   },
   { timestamps: true }
 );
+
+schema.methods.toJSON = function() {
+  const task = this;
+  const taskObject = task.toObject();
+  delete taskObject.images;
+  return taskObject;
+};
 
 const Task = mongoose.model("Task", schema);
 
